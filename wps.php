@@ -35,6 +35,19 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
 }
 
+if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+	return;
+}
+
+if ( ! defined( 'WP_DEBUG_DISPLAY' ) || false === WP_DEBUG_DISPLAY ) {
+	return;
+}
+
+// TODO separate Ajax handling
+if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+	return;
+}
+
 $whoops         = new Run;
 $whoops_handler = new PrettyPageHandler;
 
