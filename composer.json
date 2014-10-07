@@ -1,0 +1,26 @@
+{
+	"name"       : "rarst/wps",
+	"description": "WordPress plugin for whoops error handler.",
+	"keywords"   : [
+		"wordpress",
+		"whoops",
+		"error"
+	],
+	"type"       : "wordpress-plugin",
+	"homepage"   : "https://github.com/Rarst/wps",
+	"license"    : "MIT",
+	"authors"    : [
+		{
+			"name"    : "Andrey Savchenko",
+			"email"   : "contact@rarst.net",
+			"homepage": "http://www.Rarst.net/"
+		}
+	],
+	"support"    : {
+		"issues": "https://github.com/Rarst/wps/issues"
+	},
+	"require"    : {
+		"composer/installers": "~1.0",
+		"filp/whoops"        : "~1.0"
+	}
+}
