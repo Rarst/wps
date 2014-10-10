@@ -57,7 +57,7 @@ if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 
 $whoops_handler = new PrettyPageHandler;
 
-$whoops_handler->addDataTableCallback( 'WP', function () {
+$whoops_handler->addDataTableCallback( '$wp', function () {
 	global $wp;
 
 	if ( ! $wp instanceof \WP ) {
@@ -71,7 +71,7 @@ $whoops_handler->addDataTableCallback( 'WP', function () {
 	return array_filter( $output );
 } );
 
-$whoops_handler->addDataTableCallback( 'WP_Query', function () {
+$whoops_handler->addDataTableCallback( '$wp_query', function () {
 	global $wp_query;
 
 	if ( ! $wp_query instanceof \WP_Query ) {
