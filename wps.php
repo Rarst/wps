@@ -29,6 +29,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 DEALINGS IN THE SOFTWARE.*/
 
 use Whoops\Run;
+use Whoops\Handler\JsonResponseHandler;
 use Whoops\Handler\PrettyPageHandler;
 
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
@@ -43,12 +44,17 @@ if ( ! defined( 'WP_DEBUG_DISPLAY' ) || false === WP_DEBUG_DISPLAY ) {
 	return;
 }
 
-// TODO separate Ajax handling
+$whoops = new Run;
+
 if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+
+	$json_handler = new JsonResponseHandler();
+	$json_handler->addTraceToOutput( true );
+	$whoops->pushHandler( $json_handler );
+	$whoops->register();
 	return;
 }
 
-$whoops         = new Run;
 $whoops_handler = new PrettyPageHandler;
 
 $whoops_handler->addDataTableCallback( 'WP', function () {
