@@ -65,10 +65,6 @@ $whoops_handler->addDataTableCallback( 'WP', function () {
 	return array_filter( $output );
 } );
 
-$whoops_handler->addDataTableCallback( 'backtrace', function () {
-	return wp_debug_backtrace_summary( null, 0, false );
-} );
-
 $whoops_handler->addDataTableCallback( 'WP_Query', function () {
 	global $wp_query;
 
