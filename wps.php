@@ -96,3 +96,5 @@ $whoops_handler->setEditor(
 
 $whoops->pushHandler( $whoops_handler );
 $whoops->register();
+
+ob_start(); // or we are going to be spitting out WP markup before whoops
