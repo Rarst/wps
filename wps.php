@@ -54,6 +54,10 @@ $whoops_handler = new PrettyPageHandler;
 $whoops_handler->addDataTableCallback( 'WP', function () {
 	global $wp;
 
+	if ( ! $wp instanceof \WP ) {
+		return array();
+	}
+
 	$output = get_object_vars( $wp );
 	unset( $output['private_query_vars'] );
 	unset( $output['public_query_vars'] );
@@ -67,6 +71,10 @@ $whoops_handler->addDataTableCallback( 'backtrace', function () {
 
 $whoops_handler->addDataTableCallback( 'WP_Query', function () {
 	global $wp_query;
+
+	if ( ! $wp_query instanceof \WP_Query ) {
+		return array();
+	}
 
 	$output               = get_object_vars( $wp_query );
 	$output['query_vars'] = array_filter( $output['query_vars'] );
