@@ -86,7 +86,9 @@ $whoops_handler->addDataTableCallback( 'WP_Query', function () {
 	return array_filter( $output );
 } );
 
-$whoops_handler->addDataTableCallback( '$post', 'get_post' );
+$whoops_handler->addDataTableCallback( '$post', function () {
+	return get_object_vars( get_post() );
+} );
 
 $whoops_handler->setEditor(
 	function ( $file, $line ) {
