@@ -15,4 +15,5 @@ wps is a Composer package and can be installed in plugin directory via:
 wps own code is licensed under MIT and it makes use of code from:
 
  - Composer (MIT)
+ - Pimple (MIT)
  - whoops (MIT)
