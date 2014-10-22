@@ -46,7 +46,13 @@ class Plugin extends Container {
 				return array_filter( $output );
 			},
 			'$post'     => function () {
-				return get_object_vars( get_post() );
+				$post = get_post();
+
+				if ( ! $post instanceof \WP_Post ) {
+					return array();
+				}
+
+				return get_object_vars( $post );
 			},
 		);
 
