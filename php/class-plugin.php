@@ -72,7 +72,6 @@ class Plugin extends Container {
 		$defaults['handler.json'] = function () {
 			$handler = new Admin_Ajax_Handler();
 			$handler->addTraceToOutput( true );
-			$handler->onlyForAjaxRequests( true );
 
 			return $handler;
 		};

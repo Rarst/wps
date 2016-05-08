@@ -24,7 +24,7 @@ class Admin_Ajax_Handler extends JsonResponseHandler {
 	 */
 	public function handle() {
 
-		if ( $this->onlyForAjaxRequests() && ! $this->isAjaxRequest() ) {
+		if ( ! $this->isAjaxRequest() ) {
 			return Handler::DONE;
 		}
 
