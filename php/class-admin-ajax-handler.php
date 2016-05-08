@@ -43,4 +43,4 @@ class Admin_Ajax_Handler extends JsonResponseHandler {
 
 		return Handler::QUIT;
 	}
-} 
+}

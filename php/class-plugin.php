@@ -11,7 +11,7 @@ use Whoops\Run;
 class Plugin extends Container {
 
 	/**
-	 * @param array $values
+	 * @param array $values Optional arguments for container.
 	 */
 	public function __construct( $values = array() ) {
 
@@ -103,6 +103,9 @@ class Plugin extends Container {
 		return defined( 'WP_DEBUG_DISPLAY' ) && false !== WP_DEBUG_DISPLAY;
 	}
 
+	/**
+	 * Execute run conditionally on debug configuration.
+	 */
 	public function run() {
 
 		if ( ! $this->is_debug() || ! $this->is_debug_display() ) {
@@ -112,6 +115,6 @@ class Plugin extends Container {
 		/** @var Run $run */
 		$run = $this['run'];
 		$run->register();
-		ob_start(); // or we are going to be spitting out WP markup before whoops
+		ob_start(); // Or we are going to be spitting out WP markup before whoops.
 	}
-} 
+}
