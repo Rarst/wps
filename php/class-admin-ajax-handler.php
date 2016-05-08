@@ -39,7 +39,7 @@ class Admin_Ajax_Handler extends JsonResponseHandler {
 
 		$json_options = version_compare( PHP_VERSION, '5.4.0', '>=' ) ? JSON_PRETTY_PRINT : 0;
 
-		echo json_encode( $response, $json_options );
+		echo wp_json_encode( $response, $json_options );
 
 		return Handler::QUIT;
 	}
