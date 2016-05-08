@@ -21,7 +21,7 @@
 	},
 	"require"    : {
 		"composer/installers": "~1.0",
-		"filp/whoops"        : "~1.0",
+		"filp/whoops"        : "^2.1",
 		"pimple/pimple"      : "~3.0"
 	},
 	"autoload" : {
