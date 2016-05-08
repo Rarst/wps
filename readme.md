@@ -4,11 +4,11 @@ wps adds [whoops](http://filp.github.io/whoops/) error handler to a WordPress in
 
 # Installation
 
-wps is a Composer package and can be installed in plugin directory via:
+Download plugin archive from [releases section](https://github.com/Rarst/wps/releases).
+
+Or install in plugin directory via [Composer](https://getcomposer.org/):
 
     composer create-project rarst/wps --no-dev
-
-# Changelog
 
 # License Info
 
