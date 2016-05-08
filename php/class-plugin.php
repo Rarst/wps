@@ -63,8 +63,8 @@ class Plugin extends Container {
 				$handler->addDataTableCallback( $name, $callback );
 			}
 
-			// requires Remote Call plugin
-			$handler->addEditor( 'phpstorm', 'http://localhost:8091?message=%file:%line' );
+			// Requires Remote Call plugin.
+			$handler->addEditor( 'phpstorm-remote-call', 'http://localhost:8091?message=%file:%line' );
 
 			return $handler;
 		};
