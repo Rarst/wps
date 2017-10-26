@@ -76,10 +76,18 @@ class Plugin extends Container {
 			return $handler;
 		};
 
+		$defaults['handler.rest'] = function () {
+			$handler = new Rest_Api_Handler();
+			$handler->addTraceToOutput( true );
+
+			return $handler;
+		};
+
 		$defaults['run'] = function ( $plugin ) {
 			$run = new Run();
 			$run->pushHandler( $plugin['handler.pretty'] );
 			$run->pushHandler( $plugin['handler.json'] );
+			$run->pushHandler( $plugin['handler.rest'] );
 
 			return $run;
 		};
