@@ -16,7 +16,16 @@ class Rest_Api_Handler extends JsonResponseHandler {
 	 */
 	private function isRestRequest() {
 
-		return defined( 'REST_REQUEST' ) && REST_REQUEST;
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			return true;
+		}
+
+		// This is dirty, but no better way to detect before parse_request.
+		if ( ! empty( $_SERVER['REQUEST_URI'] ) && 0 !== stripos( $_SERVER['REQUEST_URI'], rest_get_url_prefix() ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
