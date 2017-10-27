@@ -5,6 +5,8 @@ This change log adheres to [Keep a CHANGELOG](http://keepachangelog.com/).
 
 ## Unreleased
 
+## 1.1 - 2017-10-27
+
 ### Added
 - WP REST API handler
 
