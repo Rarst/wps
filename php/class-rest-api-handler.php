@@ -21,7 +21,7 @@ class Rest_Api_Handler extends JsonResponseHandler {
 		}
 
 		// This is dirty, but no better way to detect before parse_request.
-		if ( ! empty( $_SERVER['REQUEST_URI'] ) && 0 !== stripos( $_SERVER['REQUEST_URI'], rest_get_url_prefix() ) ) {
+		if ( ! empty( $_SERVER['REQUEST_URI'] ) && false !== stripos( $_SERVER['REQUEST_URI'], rest_get_url_prefix() ) ) {
 			return true;
 		}
 
