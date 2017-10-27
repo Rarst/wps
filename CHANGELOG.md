@@ -8,6 +8,9 @@ This change log adheres to [Keep a CHANGELOG](http://keepachangelog.com/).
 ### Added
 - WP REST API handler
 
+### Changed
+- Updated dependencies (whoops 2.1.12, Pimple 3.2.2)
+
 ## 1.0 - 2016-05-08
 
 ### Added
