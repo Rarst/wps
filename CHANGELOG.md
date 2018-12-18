@@ -5,6 +5,9 @@ This change log adheres to [Keep a CHANGELOG](http://keepachangelog.com/).
 
 ## Unreleased
 
+## Changed
+- updated dependencies (whoops 2.3.1)
+
 ## 1.1 - 2017-10-27
 
 ### Added
