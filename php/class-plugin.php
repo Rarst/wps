@@ -93,7 +93,10 @@ class Plugin extends Container {
 			$run->pushHandler( $plugin['handler.pretty'] );
 			$run->pushHandler( $plugin['handler.json'] );
 			$run->pushHandler( $plugin['handler.rest'] );
-			$run->pushHandler( $plugin['handler.text'] );
+
+			if ( \Whoops\Util\Misc::isCommandLine() ) {
+				$run->pushHandler( $plugin['handler.text'] );
+			}
 
 			return $run;
 		};
