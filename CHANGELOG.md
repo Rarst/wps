@@ -5,10 +5,12 @@ This change log adheres to [Keep a CHANGELOG](http://keepachangelog.com/).
 
 ## Unreleased
 
-## Added
+## 1.2 - 2018-12-18
+
+### Added
 - plain text handler for CLI context
 
-## Changed
+### Changed
 - updated dependencies (whoops 2.3.1)
 
 ## 1.1 - 2017-10-27
