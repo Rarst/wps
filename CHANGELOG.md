@@ -5,6 +5,9 @@ This change log adheres to [Keep a CHANGELOG](http://keepachangelog.com/).
 
 ## Unreleased
 
+## Added
+- plain text handler for CLI context
+
 ## Changed
 - updated dependencies (whoops 2.3.1)
 

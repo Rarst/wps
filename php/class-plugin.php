@@ -2,6 +2,7 @@
 namespace Rarst\wps;
 
 use Pimple\Container;
+use Whoops\Handler\PlainTextHandler;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
@@ -83,11 +84,16 @@ class Plugin extends Container {
 			return $handler;
 		};
 
+		$defaults['handler.text'] = function () {
+			return new PlainTextHandler();
+		};
+
 		$defaults['run'] = function ( $plugin ) {
 			$run = new Run();
 			$run->pushHandler( $plugin['handler.pretty'] );
 			$run->pushHandler( $plugin['handler.json'] );
 			$run->pushHandler( $plugin['handler.rest'] );
+			$run->pushHandler( $plugin['handler.text'] );
 
 			return $run;
 		};
