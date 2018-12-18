@@ -3,6 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/rarst/wps/v/stable)](https://packagist.org/packages/rarst/wps)
 [![Total Downloads](https://poser.pugx.org/rarst/wps/downloads)](https://packagist.org/packages/rarst/wps)
 [![PHP version](https://img.shields.io/packagist/php-v/rarst/wps.svg)](https://packagist.org/packages/rarst/wps)
+[![Download wps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https://api.github.com/repos/rarst/wps/releases/latest&query=$.assets%5B0%5D.name)](https://www.rarst.net/download/wps)
 
 wps adds [whoops](http://filp.github.io/whoops/) error handler to a WordPress installation. 
 
@@ -10,11 +11,11 @@ It makes error messages from PHP, `admin-ajax.php`, and WP REST API a _great_ de
 
 ## Installation
 
-Download plugin archive from [releases section](https://github.com/Rarst/wps/releases).
+| [Composer](https://getcomposer.org/) (recommended) | Release archive |  
+| -------------------------------------------------- | -------- |  
+| `composer require rarst/wps` | [![Download wps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https%3A%2F%2Fapi.github.com%2Frepos%2Frarst%2Fwps%2Freleases%2Flatest&query=%24.assets[0].name&style=for-the-badge)](https://www.rarst.net/download/wps) |
 
-Or install in plugin directory via [Composer](https://getcomposer.org/):
-
-    composer create-project rarst/wps --no-dev
+## Usage
 
 The plugin is meant strictly for development and will only work with `WP_DEBUG` and `WP_DEBUG_DISPLAY` configuration constants enabled.
 
