@@ -49,9 +49,7 @@ class Rest_Api_Handler extends JsonResponseHandler {
 			header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 		}
 
-		$json_options = version_compare( PHP_VERSION, '5.4.0', '>=' ) ? JSON_PRETTY_PRINT : 0;
-
-		echo wp_json_encode( $response, $json_options );
+		echo wp_json_encode( $response, JSON_PRETTY_PRINT );
 
 		return Handler::QUIT;
 	}
