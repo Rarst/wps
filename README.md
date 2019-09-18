@@ -15,6 +15,12 @@ It makes error messages from PHP, `admin-ajax.php`, and WP REST API a _great_ de
 | -------------------------------------------------- | -------- |  
 | `composer require rarst/wps` | [![Download wps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https%3A%2F%2Fapi.github.com%2Frepos%2Frarst%2Fwps%2Freleases%2Flatest&query=%24.assets[0].name&style=for-the-badge)](https://www.rarst.net/download/wps) |
 
+Alternative:
+
+1. Clone this repository in your wp-content/plugins/ folder
+2. Run `composer install` within the wp-content/plugins/wps/ folder
+3. Activate the wps plugin
+
 ## Usage
 
 The plugin is meant strictly for development and will only work with `WP_DEBUG` and `WP_DEBUG_DISPLAY` configuration constants enabled.
