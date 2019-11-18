@@ -121,11 +121,19 @@ class Plugin extends Container {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function is_wp_cli() {
+
+		return defined( 'WP_CLI' ) && WP_CLI;
+	}
+
+	/**
 	 * Execute run conditionally on debug configuration.
 	 */
 	public function run() {
 
-		if ( ! $this->is_debug() || ! $this->is_debug_display() ) {
+		if ( ! $this->is_debug() || ! $this->is_debug_display() || $this->is_wp_cli() ) {
 			return;
 		}
 

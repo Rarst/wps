@@ -5,6 +5,9 @@ This change log adheres to [Keep a CHANGELOG](http://keepachangelog.com/).
 
 ## Unreleased
 
+### Added
+- a check that disables the execution if we are running WP-CLI
+
 ## 1.2 - 2018-12-18
 
 ### Added
