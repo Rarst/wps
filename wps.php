@@ -36,4 +36,5 @@ if ( isset( $_GET['wps_disable'] ) ) {
 }
 
 $wps = new \Rarst\wps\Plugin();
+$wps->skipNoticesAndWarnings(Rarst\wps\Except::pluginsDirectories('akismet'));
 $wps->run();

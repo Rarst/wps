@@ -5,6 +5,7 @@ use Pimple\Container;
 use Whoops\Handler\PlainTextHandler;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
+use Whoops\Util\SystemFacade;
 
 /**
  * Main plugin's class.
@@ -88,8 +89,29 @@ class Plugin extends Container {
 			return new PlainTextHandler();
 		};
 
+		$defaults['whoops_system_facade'] = function() {
+			return new SystemFacade;
+		};
+
+		$defaults['skip_all_notices_and_warnings'] = false;
+
+		// Plugins to watch for Notices and Warnings. If blank, then watch for
+		// notices and warnings of all plugins.
+		$defaults['watch_specific_plugins'] = [];
+
+		// Themes to watch for Notices and Warnings. If blank, then watch for
+		// notices and warnings of whichever theme is active.
+		$defaults['watch_specific_themes'] = [];
+
 		$defaults['run'] = function ( $plugin ) {
-			$run = new Run();
+			$run = new Whoops_Run_Composite( $plugin['whoops_system_facade'] );
+
+			if( true === $plugin['skip_all_notices_and_warnings'] ) {
+				$run->skipAllNoticesAndWarnings();
+			}
+			$run->watchSpecificPlugins( $plugin['watch_specific_plugins'] );
+			$run->watchSpecificThemes( $plugin['watch_specific_themes'] );
+
 			$run->pushHandler( $plugin['handler.pretty'] );
 			$run->pushHandler( $plugin['handler.json'] );
 			$run->pushHandler( $plugin['handler.rest'] );
@@ -118,6 +140,27 @@ class Plugin extends Container {
 	public function is_debug_display() {
 
 		return defined( 'WP_DEBUG_DISPLAY' ) && false !== WP_DEBUG_DISPLAY;
+	}
+
+	/**
+	 * Skip Notices and Warnings occurring while program execution
+	 *
+	 * @param Except $except Plugins & Themes to be excepted from this privilege.
+	 * @return void
+	 */
+	public function skipNoticesAndWarnings(Except $except) {
+		if( $except->empty() ) {
+			$this['skip_all_notices_and_warnings'] = true;
+			return;
+		}
+
+		if( ! $except->emptyPlugins() ) {
+			$this['watch_specific_plugins'] = $except->pluginsDirectories;
+		}
+
+		if( ! $except->emptyThemes() ) {
+			$this['watch_specific_themes'] = $except->themesDirectories;
+		}
 	}
 
 	/**
