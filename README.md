@@ -68,6 +68,32 @@ theme. Pass multiple themes to be excepted as separate arguments.
 + $wps->skipNoticesAndWarnings(new Rarst\wps\Except($excluded_plugins, $excluded_themes));
   $wps->run();
 ``` 
+### Silent Errors using Regex
+By calling `silenceErrorsInPaths` on `$wps` object in `wps.php` file
+before `$wps->run()`, one can define regex paths to silent errors.
+
+While the first parameter of silenceErrorsInPaths accepts regex path,
+the second parameter accepts error levels to silent. Multiple paths can
+be passed through an array.
+
+e.g. If you always want to silence errors coming from vendor directories,
+writing something like below in wps.php will work
+```diff
+  $wps = new \Rarst\wps\Plugin();
++ $wps->silenceErrorsInPaths('@/vendor@', E_WARNING | E_NOTICE | E_USER_WARNING | E_USER_NOTICE);
+  $wps->run();
+```
+Another Example -
+If you want to allow notices/warnings from specific plugin but at the
+same time silent errors that are coming from vendor directory which
+is inside the plugin, then you might write something like this in
+wps.php.
+```diff
+  $wps = new \Rarst\wps\Plugin();
++ $wps->skipNoticesAndWarnings(Rarst\wps\Except::pluginsDirectories('plugin-folder'));
++ $wps->silenceErrorsInPaths('@plugin-folder/vendor@', E_WARNING | E_NOTICE | E_USER_WARNING | E_USER_NOTICE);
+  $wps->run();
+```
 
 ## License
 
