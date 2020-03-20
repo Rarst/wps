@@ -103,6 +103,9 @@ class Plugin extends Container {
 		// notices and warnings of whichever theme is active.
 		$defaults['watch_specific_themes'] = [];
 
+		$this['silence_errors_in_paths.pattern'] = null;
+		$this['silence_errors_in_paths.levels'] = 10240; // E_STRICT | E_DEPRECATED.
+
 		$defaults['run'] = function ( $plugin ) {
 			$run = new Whoops_Run_Composite( $plugin['whoops_system_facade'] );
 
@@ -111,6 +114,13 @@ class Plugin extends Container {
 			}
 			$run->watchSpecificPlugins( $plugin['watch_specific_plugins'] );
 			$run->watchSpecificThemes( $plugin['watch_specific_themes'] );
+
+			if( ! is_null( $plugin['silence_errors_in_paths.pattern'] ) ) {
+				$run->silenceErrorsInPaths(
+					$plugin['silence_errors_in_paths.pattern'],
+					$plugin['silence_errors_in_paths.levels']
+				);
+			}
 
 			$run->pushHandler( $plugin['handler.pretty'] );
 			$run->pushHandler( $plugin['handler.json'] );
@@ -163,6 +173,17 @@ class Plugin extends Container {
 		}
 	}
 
+	/**
+     * Silence particular errors in particular files
+     * @param  array|string $patterns List or a single regex pattern to match
+     * @param  int          $levels   Defaults to E_STRICT | E_DEPRECATED
+     * @return \Whoops\Run
+     */
+    public function silenceErrorsInPaths($patterns, $levels = 10240) {
+		$this['silence_errors_in_paths.pattern'] = $patterns;
+		$this['silence_errors_in_paths.levels'] = $levels;
+	}
+	
 	/**
 	 * Execute run conditionally on debug configuration.
 	 */

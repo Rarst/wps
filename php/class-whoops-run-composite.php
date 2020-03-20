@@ -67,6 +67,17 @@ class Whoops_Run_Composite {
     }
 
     /**
+     * Silence particular errors in particular files
+     * @param  array|string $patterns List or a single regex pattern to match
+     * @param  int          $levels   Defaults to E_STRICT | E_DEPRECATED
+     * @return Run
+     * @see https://maximivanov.github.io/php-error-reporting-calculator/
+     */
+    public function silenceErrorsInPaths($patterns, $levels = 10240) {
+        $this->run->silenceErrorsInPaths($patterns, $levels);
+    }
+
+    /**
      * Converts generic PHP errors to \ErrorException
      * instances, before passing them off to be handled.
      *
