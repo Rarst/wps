@@ -4,33 +4,28 @@ namespace Rarst\wps;
 use InvalidArgumentException;
 
 class Except {
-    public $pluginsDirectories;
-    public $themesDirectories;
+    private $pathPatterns;
 
     /**
-     * Creates Object of Watch Class
+     * Constructor
      *
-     * @param array $pluginsDirectories Names of plugin folders to watch for
-     *                                  Notices & Warnings
-     * @param array $themesDirectories Names of theme folders to watch for
-     *                                 Notices and Warnings
+     * @param  array|string $patterns List or a single regex pattern to match
      */
-    public function __construct($pluginsDirectories = [], $themesDirectories = [])
-    {
-        if(!is_array($pluginsDirectories)) {
-            throw new InvalidArgumentException('$pluginsDirectories should be an array');
-        }
+    public function __construct($pathPatterns) {
+        $pathPatterns = func_get_args();
 
-        if(!is_array($themesDirectories)) {
-            throw new InvalidArgumentException('$themesDirectories should be an array');
+        if(is_array($pathPatterns[0])) {
+            $pathPatterns = $pathPatterns[0];
         }
-
-        $this->pluginsDirectories = $pluginsDirectories;
-        $this->themesDirectories = $themesDirectories;
+        
+        $this->pathPatterns = array_filter($pathPatterns);
     }
 
     /**
-     * Constructor 
+     * Constructor
+     * 
+     * @param array $pluginsDirectories Names of plugin folders to watch for
+     *                                  Notices & Warnings.
      */
     public static function pluginsDirectories($plugins) {
         $plugins = func_get_args();
@@ -39,11 +34,18 @@ class Except {
             throw new InvalidArgumentException('Pass plugins folder names to watch for Notices & Warnings');
         }
 
-        return new self($plugins, []);
+        $plugins = array_map(function($plugin){
+            return '@plugins/' . preg_quote($plugin, '@') . '@';
+        }, $plugins);
+
+        return new self($plugins);
     }
 
     /**
      * Constructor
+     * 
+     * @param array $themesDirectories Names of theme folders to watch for
+     *                                 Notices and Warnings.
      */
     public static function themesDirectories() {
         $themes = func_get_args();
@@ -51,25 +53,26 @@ class Except {
         if(empty($themes)) {
             throw new InvalidArgumentException('Pass themes folder names to watch for Notices & Warnings');
         }
-        return new self([], $themes);
+
+        $themes = array_map(function($theme){
+            return '@themes/' . preg_quote($theme, '@') . '@';
+        }, $themes);
+
+        return new self($themes);
     }
 
     /**
      * Constructor
      */
     public static function blank() {
-        return new self([], []);
+        return new self([]);
     }
 
     public function empty() {
-        return empty($this->pluginsDirectories) && empty($this->themesDirectories);
+        return empty($this->pathPatterns);
     }
 
-    public function emptyPlugins() {
-        return empty($this->pluginsDirectories);
-    }
-
-    public function emptyThemes() {
-        return empty($this->themesDirectories);
+    public function pathPatterns() {
+        return $this->pathPatterns;
     }
 }

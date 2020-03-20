@@ -24,9 +24,7 @@ class Whoops_Run_Composite {
     
     private $skipAllNoticesAndWarnings = false;
 
-    private $watchSpecificPlugins = [];
-
-    private $watchSpecificThemes = [];
+    private $pathPatterns;
 
     public function __construct(SystemFacade $system = null)
     {
@@ -58,12 +56,8 @@ class Whoops_Run_Composite {
         $this->skipAllNoticesAndWarnings = true;
     }
 
-    public function watchSpecificPlugins($plugins) {
-        $this->watchSpecificPlugins = $plugins;
-    }
-
-    public function watchSpecificThemes($themes) {
-        $this->watchSpecificThemes = $themes;
+    public function watchFilesWithPatterns($pathPatterns) {
+        $this->pathPatterns = $pathPatterns;
     }
 
     /**
@@ -108,29 +102,22 @@ class Whoops_Run_Composite {
             return false;
         }
 
-        // Watch for all plugins and Themes
-        if( empty($this->watchSpecificPlugins) && empty($this->watchSpecificThemes ) ) {
+        // Watch for everything
+        if( empty($this->pathPatterns) ) {
             $this->run->handleError($level, $message, $file, $line);
             return false;
         }
 
-        $watchablePlugins = empty($this->watchSpecificPlugins) ? [] : array_map(function($pluginBaseFolder){
-            return 'plugins/' . $pluginBaseFolder;
-        }, $this->watchSpecificPlugins);
-
-        $watchableThemes = empty($this->watchSpecificThemes) ? [] : array_map(function($themeBaseFolder){
-            return 'themes/' . $themeBaseFolder;
-        }, $this->watchSpecificThemes);
-
-        $directoriesToWatchFor = array_merge($watchablePlugins, $watchableThemes);
+        $pathPatternsToWatchFor = (array) $this->pathPatterns;
         $errorBelongsToWatchCriteria = false;
         
         // We are creating an exception object because Inspector Class needs it.
         $exception = new ErrorException($message, /*code*/ $level, /*severity*/ $level, $file, $line);
         $frames = (new Inspector($exception))->getFrames();
         foreach( $frames as $frame ) {
-            foreach($directoriesToWatchFor as $directory) {
-                if (strpos($frame->getFile(), $directory) !== false) {
+            foreach($pathPatternsToWatchFor as $pathPattern) {
+                $pathMatches = (bool) preg_match($pathPattern, $frame->getFile());
+                if ($pathMatches) {
                     $errorBelongsToWatchCriteria = true;
                     break 2;
                 }

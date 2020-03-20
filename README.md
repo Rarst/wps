@@ -35,17 +35,19 @@ In `wps.php`, call `skipNoticesAndWarnings()` on `$wps` object. So it
 might look like this
 ```diff
   $wps = new \Rarst\wps\Plugin();
-+ $wps->skipNoticesAndWarnings(Rarst\wps\Except::blank());
++ $wps->skipNoticesAndWarnings(Except::blank());
   $wps->run();
 ```
 
 `skipNoticesAndWarnings` accepts an object of `Rarst\wps\Except` class to
-enable Whoops for notices/warnings of only specified plugins/themes.
+enable Whoops for notices/warnings of only specified plugins/themes. 
+`Except` class accepts array of regex patterns to be excluded from skipping
+notices and warnings.
 
 ### Enable Whoops' Notices/Warnings Blocking for Specific Plugins
 ```diff
   $wps = new \Rarst\wps\Plugin();
-+ $wps->skipNoticesAndWarnings(Rarst\wps\Except::pluginsDirectories('akismet'));
++ $wps->skipNoticesAndWarnings(Except::pluginsDirectories('akismet'));
   $wps->run();
 ```
 Above example will skip all notices and warnings except coming from `akismet`
@@ -54,7 +56,7 @@ plugin. Pass multiple plugins to be excepted as separate arguments.
 ### Enable Whoops Notices/Warnings Blocking Blocking for Specific Themes
 ```diff
   $wps = new \Rarst\wps\Plugin();
-+ $wps->skipNoticesAndWarnings(Rarst\wps\Except::themesDirectories('twentytwenty'));
++ $wps->skipNoticesAndWarnings(Except::themesDirectories('twentytwenty'));
   $wps->run();
 ```
 Above example will skip all notices and warnings except coming from `twentytwenty`
@@ -63,9 +65,8 @@ theme. Pass multiple themes to be excepted as separate arguments.
 ### Enable Whoops Blocking for Specific Plugins and Themes together
 ```diff
   $wps = new \Rarst\wps\Plugin();
-+ $excluded_plugins = ['akismet'];
-+ $excluded_themes  = ['twentytwenty'];
-+ $wps->skipNoticesAndWarnings(new Rarst\wps\Except($excluded_plugins, $excluded_themes));
++ $exceptions = ['@plugins/akismet@', '@themes/twentytwenty@'];
++ $wps->skipNoticesAndWarnings(new Except($exceptions));
   $wps->run();
 ``` 
 ### Silent Errors using Regex
@@ -90,7 +91,7 @@ is inside the plugin, then you might write something like this in
 wps.php.
 ```diff
   $wps = new \Rarst\wps\Plugin();
-+ $wps->skipNoticesAndWarnings(Rarst\wps\Except::pluginsDirectories('plugin-folder'));
++ $wps->skipNoticesAndWarnings(Except::pluginsDirectories('plugin-folder'));
 + $wps->silenceErrorsInPaths('@plugin-folder/vendor@', E_WARNING | E_NOTICE | E_USER_WARNING | E_USER_NOTICE);
   $wps->run();
 ```

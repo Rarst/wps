@@ -95,13 +95,8 @@ class Plugin extends Container {
 
 		$defaults['skip_all_notices_and_warnings'] = false;
 
-		// Plugins to watch for Notices and Warnings. If blank, then watch for
-		// notices and warnings of all plugins.
-		$defaults['watch_specific_plugins'] = [];
-
-		// Themes to watch for Notices and Warnings. If blank, then watch for
-		// notices and warnings of whichever theme is active.
-		$defaults['watch_specific_themes'] = [];
+		// Files to watch for Notices and Warnings.
+		$defaults['watch_files'] = null;
 
 		$this['silence_errors_in_paths.pattern'] = null;
 		$this['silence_errors_in_paths.levels'] = 10240; // E_STRICT | E_DEPRECATED.
@@ -112,8 +107,10 @@ class Plugin extends Container {
 			if( true === $plugin['skip_all_notices_and_warnings'] ) {
 				$run->skipAllNoticesAndWarnings();
 			}
-			$run->watchSpecificPlugins( $plugin['watch_specific_plugins'] );
-			$run->watchSpecificThemes( $plugin['watch_specific_themes'] );
+
+			if( ! is_null( $plugin['watch_files'] ) ) {
+				$run->watchFilesWithPatterns( $plugin['watch_files'] );
+			}
 
 			if( ! is_null( $plugin['silence_errors_in_paths.pattern'] ) ) {
 				$run->silenceErrorsInPaths(
@@ -155,7 +152,7 @@ class Plugin extends Container {
 	/**
 	 * Skip Notices and Warnings occurring while program execution
 	 *
-	 * @param Except $except Plugins & Themes to be excepted from this privilege.
+	 * @param Except $except Directories to be excepted from this privilege.
 	 * @return void
 	 */
 	public function skipNoticesAndWarnings(Except $except) {
@@ -164,13 +161,7 @@ class Plugin extends Container {
 			return;
 		}
 
-		if( ! $except->emptyPlugins() ) {
-			$this['watch_specific_plugins'] = $except->pluginsDirectories;
-		}
-
-		if( ! $except->emptyThemes() ) {
-			$this['watch_specific_themes'] = $except->themesDirectories;
-		}
+		$this['watch_files'] = $except->pathPatterns();
 	}
 
 	/**
@@ -190,6 +181,11 @@ class Plugin extends Container {
 	public function run() {
 
 		if ( ! $this->is_debug() || ! $this->is_debug_display() ) {
+			add_action('admin_notices', function(){
+				echo '<div class="notice notice-warning is-dismissible">
+						<p><strong>wps</strong> plugin works only when <code>WP_DEBUG</code> & <code>WP_DEBUG_DISPLAY</code> constants are set to <code>true</code></p>
+					</div>';
+			});
 			return;
 		}
 
