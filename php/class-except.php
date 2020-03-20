@@ -54,6 +54,13 @@ class Except {
         return new self([], $themes);
     }
 
+    /**
+     * Constructor
+     */
+    public static function blank() {
+        return new self([], []);
+    }
+
     public function empty() {
         return empty($this->pluginsDirectories) && empty($this->themesDirectories);
     }

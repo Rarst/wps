@@ -35,7 +35,7 @@ In `wps.php`, call `skipNoticesAndWarnings()` on `$wps` object. So it
 might look like this
 ```diff
   $wps = new \Rarst\wps\Plugin();
-+ $wps->skipNoticesAndWarnings();
++ $wps->skipNoticesAndWarnings(Rarst\wps\Except::blank());
   $wps->run();
 ```
 
