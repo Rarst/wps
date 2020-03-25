@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/rarst/wps/v/stable)](https://packagist.org/packages/rarst/wps)
 [![Total Downloads](https://poser.pugx.org/rarst/wps/downloads)](https://packagist.org/packages/rarst/wps)
 [![PHP version](https://img.shields.io/packagist/php-v/rarst/wps.svg)](https://packagist.org/packages/rarst/wps)
-[![Download wps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https://api.github.com/repos/rarst/wps/releases/latest&query=$.assets%5B0%5D.name)](https://github.com/Rarst/wps/releases/latest/download/wps.zip)
+[![Download wps](https://img.shields.io/badge/download-wps.zip-blue)](https://github.com/Rarst/wps/releases/latest/download/wps.zip)
 
 wps adds [whoops](http://filp.github.io/whoops/) error handler to a WordPress installation. 
 
@@ -13,7 +13,7 @@ It makes error messages from PHP, `admin-ajax.php`, and WP REST API a _great_ de
 
 | [Composer](https://getcomposer.org/) (recommended) | Release archive |  
 | -------------------------------------------------- | -------- |  
-| `composer require rarst/wps` | [![Download wps](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https%3A%2F%2Fapi.github.com%2Frepos%2Frarst%2Fwps%2Freleases%2Flatest&query=%24.assets[0].name&style=for-the-badge)](https://github.com/Rarst/wps/releases/latest/download/wps.zip) |
+| `composer require rarst/wps` | [![Download wps](https://img.shields.io/badge/download-wps.zip-blue?style=for-the-badge)](https://github.com/Rarst/wps/releases/latest/download/wps.zip) |
 
 ## Usage
 
