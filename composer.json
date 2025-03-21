@@ -1,5 +1,6 @@
 {
 	"name"       : "rarst/wps",
+	"version"    : "2.0.0",
 	"description": "WordPress plugin for whoops error handler.",
 	"keywords"   : [
 		"wordpress",
@@ -20,12 +21,17 @@
 		"issues": "https://github.com/Rarst/wps/issues"
 	},
 	"require"    : {
-		"php"                : ">=5.5.9",
-		"composer/installers": "~1.6",
+		"php": "^7.2 || ^8.0",
+		"composer/installers": "^v2.3.0",
 		"filp/whoops"        : "^2.3.1",
 		"pimple/pimple"      : "^3.2.3"
 	},
 	"autoload" : {
 		"classmap" : ["php/"]
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
 	}
 }

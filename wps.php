@@ -4,7 +4,7 @@ Plugin Name: wps
 Plugin URI: https://github.com/Rarst/wps
 Description: WordPress plugin for Whoops error handler.
 Author: Andrey "Rarst" Savchenko
-Version: 
+Version: 2.0.0
 Author URI: http://www.rarst.net/
 License: MIT
 
