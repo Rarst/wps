@@ -4,7 +4,7 @@ Plugin Name: wpWhoops
 Plugin URI: https://github.com/Rarst/wps
 Description: WordPress plugin for Whoops error handler (previously wps).
 Author: Andrey "Rarst" Savchenko
-Version: 1.3.3
+Version: 1.3.4
 Author URI: http://www.rarst.net/
 License: MIT
 
@@ -39,5 +39,5 @@ add_action('plugins_loaded', function() {
 	$wps->run();
 
 	//We want all deprecated logging in non-PROD envs, but there's no need to display blocking errors
-	$wps['run']->silenceErrorsInPaths('~.*~', E_DEPRECATED);
+	$wps['run']->silenceErrorsInPaths('~.*~', E_DEPRECATED | E_USER_DEPRECATED);
 });

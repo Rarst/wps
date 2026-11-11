@@ -1,7 +1,7 @@
 {
 	"name"       : "philipdowner/wp-whoops",
 	"description": "WordPress plugin for whoops error handler.",
-	"version": "1.3.3",
+	"version": "1.3.4",
 	"keywords"   : [
 		"wordpress",
 		"wordpress-plugin",
